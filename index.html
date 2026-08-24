@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
+    <meta name="description" content="Jerrad Ward is a Long Beach digital marketer and growth strategist focused on performance marketing, content strategy, SEO, and lead generation." />
+    <meta property="og:title" content="Jerrad Ward | Digital Marketer & Growth Strategist" />
+    <meta property="og:description" content="Strategy, campaigns, and digital experiences that turn attention into measurable growth." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jerradward.me/" />
+    <title>Jerrad Ward | Digital Marketer &amp; Growth Strategist</title>
     <style>
       :root {
         --bg: #0b1020;
@@ -41,6 +46,22 @@
       a {
         text-decoration: none;
         color: inherit;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: 16px;
+        top: -48px;
+        z-index: 10;
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: white;
+        color: var(--bg);
+        font-weight: 700;
+      }
+
+      .skip-link:focus {
+        top: 16px;
       }
 
       .container {
@@ -594,34 +615,6 @@
         gap: 12px;
       }
 
-      .cta-form input,
-      .cta-form textarea {
-        width: 100%;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 12px;
-        padding: 13px 14px;
-        font: inherit;
-        color: var(--text);
-        background: rgba(255, 255, 255, 0.08);
-        outline: none;
-      }
-
-      .cta-form input:focus,
-      .cta-form textarea:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(124, 156, 255, 0.2);
-      }
-
-      .cta-form textarea {
-        resize: vertical;
-        min-height: 100px;
-      }
-
-      .cta-form button {
-        border: 0;
-        cursor: pointer;
-      }
-
       .form-status {
         min-height: 1.5em;
         margin: 0;
@@ -777,8 +770,9 @@
     </style>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header>
-      <nav>
+      <nav aria-label="Primary navigation">
         <div class="brand"><span>Jerrad Ward</span></div>
         <div class="nav-links">
           <a href="#work">Work</a>
@@ -789,7 +783,7 @@
       </nav>
     </header>
 
-    <main class="container">
+    <main class="container" id="main-content">
       <section class="hero">
         <div class="hero-copy">
           <div class="eyebrow">Digital Marketer • Growth Strategist</div>
