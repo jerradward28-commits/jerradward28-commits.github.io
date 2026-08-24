@@ -574,6 +574,41 @@
       .cta-form input,
       .cta-form textarea {
         width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 13px 14px;
+        font: inherit;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.08);
+        outline: none;
+      }
+
+      .cta-form input:focus,
+      .cta-form textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(124, 156, 255, 0.2);
+      }
+
+      .cta-form textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .cta-form button {
+        border: 0;
+        cursor: pointer;
+      }
+
+      .form-status {
+        min-height: 1.5em;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+      }
+
+      .cta-form input,
+      .cta-form textarea {
+        width: 100%;
         border: 1px solid rgba(255,255,255,0.15);
         border-radius: 12px;
         background: rgba(255,255,255,0.04);
@@ -742,8 +777,8 @@
             and digital experiences that move customers to take action.
           </p>
           <div class="button-row">
-            <a class="btn btn-primary" href="#">View Case Studies</a>
-            <a class="btn btn-secondary" href="#">Book a Call</a>
+            <a class="btn btn-primary" href="#work">View Case Studies</a>
+            <a class="btn btn-secondary" href="#contact">Book a Call</a>
           </div>
         </div>
 
@@ -758,7 +793,7 @@
       <section class="section" id="work">
         <div class="section-head">
           <h3>Selected campaigns</h3>
-          <a href="#">See all work</a>
+          <a href="assets/digital-marketing-eportfolio.pdf" target="_blank" rel="noopener noreferrer">See all work</a>
         </div>
 
         <div class="projects">
@@ -792,10 +827,10 @@
         </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="services">
         <div class="section-head">
           <h3>Services</h3>
-          <a href="#">Explore offerings</a>
+          <a href="#contact">Explore offerings</a>
         </div>
 
         <div class="services">
@@ -825,10 +860,10 @@
         </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="results">
         <div class="section-head">
           <h3>Results that matter</h3>
-          <a href="#">See outcomes</a>
+          <a href="#results">See outcomes</a>
         </div>
 
         <div class="results">
@@ -851,10 +886,10 @@
         </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="testimonials">
         <div class="section-head">
           <h3>What clients say</h3>
-          <a href="#">Client feedback</a>
+          <a href="#testimonials">Client feedback</a>
         </div>
 
         <div class="testimonials">
@@ -899,7 +934,7 @@
       <section class="section" id="insights">
         <div class="section-head">
           <h3>Certifications</h3>
-          <a href="#">View credentials</a>
+          <a href="#insights">View credentials</a>
         </div>
 
         <div class="certifications">
@@ -973,11 +1008,12 @@
           </div>
         </div>
 
-        <form class="cta-form">
-          <input type="text" placeholder="Your name" aria-label="Your name" />
-          <input type="email" placeholder="Email address" aria-label="Email address" />
-          <textarea rows="3" placeholder="Tell me about your goals" aria-label="Tell me about your goals"></textarea>
+        <form class="cta-form" id="contact-form">
+          <input id="name" name="name" type="text" placeholder="Your name" aria-label="Your name" autocomplete="name" required />
+          <input id="email" name="email" type="email" placeholder="Email address" aria-label="Email address" autocomplete="email" required />
+          <textarea id="message" name="message" rows="3" placeholder="Tell me about your goals" aria-label="Tell me about your goals" required></textarea>
           <button type="submit">Let’s Talk</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </section>
     </main>
@@ -985,5 +1021,27 @@
     <footer>
       © 2026 Jerrad Ward | <a href="mailto:jerradward28@gmail.com">jerradward28@gmail.com</a> | <a href="tel:+15625080131">(562) 508-0131</a>
     </footer>
+    <script>
+      const contactForm = document.querySelector("#contact-form");
+      const formStatus = document.querySelector("#form-status");
+
+      contactForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (!contactForm.checkValidity()) {
+          contactForm.reportValidity();
+          return;
+        }
+
+        const formData = new FormData(contactForm);
+        const subject = encodeURIComponent(`Portfolio inquiry from ${formData.get("name")}`);
+        const body = encodeURIComponent(
+          `Name: ${formData.get("name")}\nEmail: ${formData.get("email")}\n\n${formData.get("message")}`
+        );
+
+        formStatus.textContent = "Opening your email app...";
+        window.location.href = `mailto:jerradward28@gmail.com?subject=${subject}&body=${body}`;
+      });
+    </script>
   </body>
 </html>
