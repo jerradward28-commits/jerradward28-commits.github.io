@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg-soft: #121a2d;
+        --card: #111b2d;
+        --card-soft: #16233d;
+        --text: #eaf1ff;
+        --muted: #a8b4cf;
+        --primary: #7c9cff;
+        --primary-dark: #6787fa;
+        --secondary: rgba(124, 156, 255, 0.12);
+        --border: rgba(148, 163, 184, 0.18);
+        --glow: rgba(124, 156, 255, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(124, 156, 255, 0.18), transparent 25%),
+          linear-gradient(180deg, #0b1020 0%, #0d1427 100%);
+        color: var(--text);
+        line-height: 1.6;
+        letter-spacing: -0.01em;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .container {
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        background: rgba(11, 16, 32, 0.78);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(10px);
+      }
+
+      nav {
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 18px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .brand {
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+
+      .brand span {
+        letter-spacing: 0.04em;
+        background: linear-gradient(135deg, #ffffff, #c7d2fe);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 24px;
+        color: var(--muted);
+      }
+
+      .nav-links a {
+        transition: color 0.2s ease, transform 0.2s ease;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.76rem;
+      }
+
+      .nav-links a:hover {
+        transform: translateY(-1px);
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 42px;
+        padding: 82px 0 48px;
+        align-items: center;
+      }
+
+      .hero-copy {
+        max-width: 760px;
+      }
+
+      .eyebrow {
+        color: var(--primary);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .mini-question {
+        margin: 10px 0 0;
+        color: var(--text);
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 5vw, 4.2rem);
+        line-height: 1.05;
+        margin: 14px 0 18px;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1.08rem;
+        max-width: 600px;
+      }
+
+      .button-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-top: 26px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 14px 22px;
+        border-radius: 999px;
+        font-weight: 700;
+        text-align: center;
+        border: 1px solid transparent;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        box-shadow: 0 8px 18px rgba(79, 70, 229, 0.12);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), #9d7bff);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(135deg, var(--primary-dark), #8b6bf2);
+      }
+
+      .btn-secondary {
+        background: var(--secondary);
+        color: var(--primary);
+      }
+
+      .profile-card {
+        background: linear-gradient(135deg, rgba(124, 156, 255, 0.14), rgba(17, 27, 45, 0.95));
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 28px;
+        box-shadow: 0 14px 32px rgba(124, 156, 255, 0.12);
+        position: relative;
+      }
+
+      .profile-card::before {
+        content: "";
+        position: absolute;
+        inset: 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(124, 156, 255, 0.12);
+        pointer-events: none;
+      }
+
+      .profile-card::after {
+        content: "";
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(124, 156, 255, 0.28), transparent 70%);
+        right: 18px;
+        top: 18px;
+        pointer-events: none;
+      }
+
+      .profile-meta {
+        display: inline-block;
+        margin-top: 16px;
+        padding: 7px 12px;
+        background: rgba(124, 156, 255, 0.12);
+        color: var(--primary);
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), #7c3aed);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 2.2rem;
+        margin-bottom: 18px;
+      }
+
+      .profile-card h2 {
+        margin: 0 0 8px;
+      }
+
+      .profile-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .section {
+        padding: 52px 0 12px;
+        scroll-margin-top: 96px;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 20px;
+        margin-bottom: 24px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section-head h3 {
+        font-size: 1.9rem;
+        margin: 0;
+      }
+
+      .section-head a {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .section-head a:hover {
+        text-decoration: underline;
+      }
+
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .project {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .project:hover {
+        border-color: rgba(124, 156, 255, 0.28);
+      }
+
+      .project:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 28px rgba(15, 23, 42, 0.08);
+      }
+
+      .project-image {
+        height: 210px;
+        background: linear-gradient(135deg, #dbeafe, #e9d5ff);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(15,23,42,0.06));
+      }
+
+      .project-content {
+        padding: 22px;
+      }
+
+      .project-link {
+        display: inline-block;
+        margin-top: 16px;
+        color: var(--primary);
+        font-weight: 700;
+      }
+
+      .project-link:hover {
+        text-decoration: underline;
+      }
+
+      .tag {
+        display: inline-block;
+        background: #eef2ff;
+        color: var(--primary);
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 6px 10px;
+        margin-bottom: 12px;
+      }
+
+      .project h4 {
+        margin: 0 0 10px;
+        font-size: 1.3rem;
+      }
+
+      .project p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .about {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 30px;
+        align-items: center;
+        padding: 60px 0 20px;
+      }
+
+      .about-panel {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 30px;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+      }
+
+      .about-panel:first-child {
+        background: linear-gradient(180deg, rgba(17, 27, 45, 0.96), rgba(17, 27, 45, 0.88));
+      }
+
+      .about-panel h3 {
+        margin-top: 0;
+        font-size: 2rem;
+      }
+
+      .about-panel p {
+        margin-bottom: 0;
+      }
+
+      .expertise-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .expertise-list span {
+        background: #f3f4ff;
+        border: 1px solid rgba(79, 70, 229, 0.12);
+        color: var(--primary);
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .stat {
+        background: #f8f9ff;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 18px 14px;
+        text-align: center;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.7rem;
+        margin-bottom: 6px;
+      }
+
+      .services {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+        margin: 18px 0 0;
+      }
+
+      .service-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 24px 20px;
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+        transition: transform 0.2s ease, border-color 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .service-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(124, 156, 255, 0.3);
+      }
+
+      .service-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(79,70,229,0.12), rgba(79,70,229,0.22));
+        border: 1px solid rgba(124, 156, 255, 0.18);
+        display: grid;
+        place-items: center;
+        font-size: 1.4rem;
+        margin-bottom: 18px;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+      }
+
+      .service-card h4 {
+        margin: 0 0 10px;
+        font-size: 1.15rem;
+      }
+
+      .service-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      .results {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        margin: 28px 0 0;
+      }
+
+      .result-card {
+        background: linear-gradient(135deg, rgba(124,156,255,0.08), rgba(17,27,45,0.9));
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 24px 18px;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .result-card strong {
+        display: block;
+        font-size: clamp(2rem, 3vw, 2.5rem);
+        color: var(--primary);
+        margin-bottom: 8px;
+      }
+
+      .result-card span {
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .testimonials {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+        margin-top: 18px;
+      }
+
+      .testimonial {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 24px 22px;
+        box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+      }
+
+      .stars {
+        color: #fbbf24;
+        letter-spacing: 0.12em;
+        margin-bottom: 14px;
+      }
+
+      .testimonial p {
+        color: var(--muted);
+        margin: 0 0 18px;
+      }
+
+      .person {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .person-badge {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(124, 156, 255, 0.15), rgba(124, 156, 255, 0.3));
+        color: var(--primary);
+        font-weight: 700;
+      }
+
+      .person strong {
+        display: block;
+      }
+
+      .person span {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .cta {
+        margin-top: 32px;
+        background: linear-gradient(135deg, #0d1529, #1e2f64);
+        border-radius: 28px;
+        padding: 36px 30px;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 22px;
+        align-items: center;
+        color: white;
+        border: 1px solid rgba(124, 156, 255, 0.2);
+        box-shadow: 0 18px 42px rgba(30, 47, 100, 0.25);
+      }
+
+      .cta h3 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 3vw, 2.6rem);
+      }
+
+      .cta p {
+        margin: 0;
+        color: rgba(255,255,255,0.8);
+      }
+
+      .cta-form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .cta-form input,
+      .cta-form textarea {
+        width: 100%;
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 12px;
+        background: rgba(255,255,255,0.04);
+        color: white;
+        padding: 14px 16px;
+        font: inherit;
+      }
+
+      .cta-form input::placeholder,
+      .cta-form textarea::placeholder {
+        color: rgba(255,255,255,0.7);
+      }
+
+      .cta-form button {
+        width: fit-content;
+        border: none;
+        border-radius: 999px;
+        padding: 14px 20px;
+        font-weight: 700;
+        background: white;
+        color: var(--primary);
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .cta-form button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 22px rgba(255,255,255,0.18);
+      }
+
+      .contact-details {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .contact-item {
+        color: rgba(255,255,255,0.8);
+        font-size: 0.98rem;
+      }
+
+      .contact-item a {
+        color: white;
+        font-weight: 600;
+      }
+
+      .certifications {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+        margin-top: 18px;
+      }
+
+      .cert-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 24px 20px;
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+        text-align: center;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .cert-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(124, 156, 255, 0.3);
+      }
+
+      .cert-badge {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(124, 156, 255, 0.15), rgba(124, 156, 255, 0.3));
+        display: grid;
+        place-items: center;
+        margin: 0 auto 14px;
+        font-size: 1.8rem;
+      }
+
+      .cert-card h4 {
+        margin: 0 0 8px;
+        font-size: 1.1rem;
+      }
+
+      .cert-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .cert-issuer {
+        margin-top: 12px;
+        color: var(--primary);
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      footer {
+        text-align: center;
+        padding: 52px 20px 80px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 900px) {
+        .hero,
+        .about,
+        .projects,
+        .results,
+        .testimonials,
+        .cta {
+          grid-template-columns: 1fr;
+        }
+
+        .services {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 600px) {
+        .nav-links {
+          gap: 12px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        nav {
+          flex-direction: column;
+        }
+
+        .section-head {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-top: 56px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="brand"><span>Jerrad Ward</span></div>
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#insights">Insights</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Digital Marketer • Growth Strategist</div>
+          <p class="mini-question">What are you doing?</p>
+          <h1>Turning attention into action with campaigns that convert.</h1>
+          <p>
+            I help brands grow through smart strategy, performance marketing, content that connects,
+            and digital experiences that move customers to take action.
+          </p>
+          <div class="button-row">
+            <a class="btn btn-primary" href="#">View Case Studies</a>
+            <a class="btn btn-secondary" href="#">Book a Call</a>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="avatar">JW</div>
+          <h2>Jerrad Ward</h2>
+          <p>Helping brands reach more people and turn traffic into measurable growth.</p>
+          <span class="profile-meta">Available for select projects</span>
+        </div>
+      </section>
+
+      <section class="section" id="work">
+        <div class="section-head">
+          <h3>Selected campaigns</h3>
+          <a href="#">See all work</a>
+        </div>
+
+        <div class="projects">
+          <article class="project">
+            <div class="project-image"></div>
+            <div class="project-content">
+              <span class="tag">Paid Media</span>
+              <h4>Northstar Growth Sprint</h4>
+              <p>Performance marketing strategy designed to increase qualified leads and lower acquisition costs.</p>
+              <a class="project-link" href="assets/digital-marketing-eportfolio.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-image" style="background: linear-gradient(135deg, #fee2e2, #fecaca);"></div>
+            <div class="project-content">
+              <span class="tag">Brand Story</span>
+              <h4>Bloom Launch</h4>
+              <p>Messaging and campaign system built to create clarity, trust, and stronger conversion paths.</p>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-image" style="background: linear-gradient(135deg, #dcfce7, #bbf7d0);"></div>
+            <div class="project-content">
+              <span class="tag">Content Strategy</span>
+              <h4>Summit Funnel</h4>
+              <p>Audience-first content plan that turned engagement into a more effective sales pipeline.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h3>Services</h3>
+          <a href="#">Explore offerings</a>
+        </div>
+
+        <div class="services">
+          <div class="service-card">
+            <div class="service-icon">📈</div>
+            <h4>Performance Marketing</h4>
+            <p>Paid media strategies built to drive targeted traffic, quality leads, and clear ROI.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">✍️</div>
+            <h4>Content & Messaging</h4>
+            <p>Brand stories and content frameworks that connect with audiences and strengthen conversion.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🔎</div>
+            <h4>SEO Strategy</h4>
+            <p>Search-focused growth plans that help businesses rank, attract, and nurture more qualified traffic.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🎯</div>
+            <h4>Lead Generation</h4>
+            <p>Funnel systems and campaign optimization designed to move prospects steadily toward action.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h3>Results that matter</h3>
+          <a href="#">See outcomes</a>
+        </div>
+
+        <div class="results">
+          <div class="result-card">
+            <strong>3.4x</strong>
+            <span>Average ROAS lift</span>
+          </div>
+          <div class="result-card">
+            <strong>68%</strong>
+            <span>More qualified leads</span>
+          </div>
+          <div class="result-card">
+            <strong>2.1x</strong>
+            <span>Faster conversion flow</span>
+          </div>
+          <div class="result-card">
+            <strong>12</strong>
+            <span>Brands supported</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h3>What clients say</h3>
+          <a href="#">Client feedback</a>
+        </div>
+
+        <div class="testimonials">
+          <article class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>“Jerrad brought structure to our marketing and turned scattered ideas into a repeatable growth engine.”</p>
+            <div class="person">
+              <div class="person-badge">A</div>
+              <div>
+                <strong>Alicia Moore</strong>
+                <span>Marketing Lead, Northstar</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>“The campaigns were clearer, faster, and more measurable. We saw stronger lead quality almost immediately.”</p>
+            <div class="person">
+              <div class="person-badge">D</div>
+              <div>
+                <strong>Daniel Reed</strong>
+                <span>Founder, Bloom Studio</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>“Jerrad combines strategy with execution in a way that feels both creative and commercially smart.”</p>
+            <div class="person">
+              <div class="person-badge">S</div>
+              <div>
+                <strong>Sophia Chen</strong>
+                <span>Director, Summit Labs</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="insights">
+        <div class="section-head">
+          <h3>Certifications</h3>
+          <a href="#">View credentials</a>
+        </div>
+
+        <div class="certifications">
+          <div class="cert-card">
+            <div class="cert-badge">🎓</div>
+            <h4>Social Media Certified</h4>
+            <p>Inbound social media strategy, content planning, engagement, and ROI measurement.</p>
+            <div class="cert-issuer">HubSpot Academy</div>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-badge">🔎</div>
+            <h4>AEO Fundamentals</h4>
+            <p>Answer engine optimization, search visibility, and AI-driven content strategy.</p>
+            <div class="cert-issuer">HubSpot Academy</div>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-badge">📈</div>
+            <h4>Digital Marketing Certified</h4>
+            <p>Content strategy, website optimization, social media, and campaign performance.</p>
+            <div class="cert-issuer">HubSpot Academy</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about" id="about">
+        <div class="about-panel">
+          <h3>About me</h3>
+          <p>
+            I’m a digital marketer focused on helping businesses grow with strategy, creative direction,
+            and campaigns that turn attention into measurable results. From content to conversion,
+            I build systems that support long-term growth and stronger customer engagement.
+          </p>
+          <div class="expertise-list">
+            <span>SEO</span>
+            <span>Paid Ads</span>
+            <span>Content Strategy</span>
+            <span>Lead Generation</span>
+            <span>Brand Messaging</span>
+          </div>
+        </div>
+
+        <div class="about-panel">
+          <div class="stats">
+            <div class="stat">
+              <strong>6+</strong>
+              Years
+            </div>
+            <div class="stat">
+              <strong>40+</strong>
+              Campaigns
+            </div>
+            <div class="stat">
+              <strong>12</strong>
+              Brands
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="contact">
+        <div>
+          <h3>Ready to turn attention into growth?</h3>
+          <p>
+            Let’s build a smarter strategy for your next campaign, funnel, or brand launch.
+          </p>
+          <div class="contact-details">
+            <div class="contact-item">Email: <a href="mailto:jerradward28@gmail.com">jerradward28@gmail.com</a></div>
+            <div class="contact-item">Phone: <a href="tel:+15625080131">(562) 508-0131</a></div>
+          </div>
+        </div>
+
+        <form class="cta-form">
+          <input type="text" placeholder="Your name" aria-label="Your name" />
+          <input type="email" placeholder="Email address" aria-label="Email address" />
+          <textarea rows="3" placeholder="Tell me about your goals" aria-label="Tell me about your goals"></textarea>
+          <button type="submit">Let’s Talk</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      © 2026 Jerrad Ward | <a href="mailto:jerradward28@gmail.com">jerradward28@gmail.com</a> | <a href="tel:+15625080131">(562) 508-0131</a>
+    </footer>
+  </body>
+</html>
