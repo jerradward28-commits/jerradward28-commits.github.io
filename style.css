@@ -181,3 +181,154 @@ footer[id] {
 	gap: 0.8rem;
 	color: #38bdf8;
 }
+
+/* Hero artwork and page motion */
+.hero-copy,
+.profile-card,
+.section,
+.cta {
+	animation: reveal-up 0.8s ease both;
+}
+
+.profile-card {
+	overflow: hidden;
+}
+
+.profile-art {
+	position: absolute;
+	inset: 0;
+	height: 220px;
+	background:
+		radial-gradient(circle at 50% 45%, rgba(124, 156, 255, 0.26), transparent 28%),
+		linear-gradient(135deg, rgba(124, 156, 255, 0.12), rgba(17, 27, 45, 0.1));
+	border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+	overflow: hidden;
+}
+
+.profile-art::before,
+.profile-art::after {
+	content: '';
+	position: absolute;
+	width: 260px;
+	height: 1px;
+	background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.65), transparent);
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(32deg);
+	animation: art-scan 5s ease-in-out infinite;
+}
+
+.profile-art::after {
+	transform: translate(-50%, -50%) rotate(-32deg);
+	animation-delay: -2.5s;
+}
+
+.art-orbit {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	border: 1px solid rgba(125, 211, 252, 0.45);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.art-orbit-one {
+	width: 150px;
+	height: 150px;
+	animation: orbit-spin 14s linear infinite;
+}
+
+.art-orbit-two {
+	width: 210px;
+	height: 74px;
+	border-color: rgba(196, 181, 253, 0.5);
+	transform: translate(-50%, -50%) rotate(42deg);
+	animation: orbit-spin-reverse 11s linear infinite;
+}
+
+.art-core {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 66px;
+	height: 66px;
+	display: grid;
+	place-items: center;
+	transform: translate(-50%, -50%);
+	border: 1px solid rgba(255, 255, 255, 0.65);
+	border-radius: 50%;
+	background: #111b2d;
+	box-shadow: 0 0 0 8px rgba(124, 156, 255, 0.08), 0 0 28px rgba(125, 211, 252, 0.4);
+	color: white;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+}
+
+.art-label {
+	position: absolute;
+	color: rgba(226, 232, 240, 0.72);
+	font-size: 0.58rem;
+	font-weight: 700;
+	letter-spacing: 0.16em;
+}
+
+.art-label-top { top: 24px; left: 50%; transform: translateX(-50%); }
+.art-label-right { right: 22px; top: 50%; transform: translateY(-50%); }
+.art-label-bottom { bottom: 20px; left: 50%; transform: translateX(-50%); }
+
+.profile-card > .avatar {
+	position: relative;
+	margin-top: 174px;
+}
+
+.project,
+.service-card,
+.result-card,
+.testimonial,
+.cert-card,
+.about-panel {
+	transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.project:hover,
+.service-card:hover,
+.result-card:hover,
+.testimonial:hover,
+.cert-card:hover,
+.about-panel:hover {
+	transform: translateY(-6px);
+	border-color: rgba(124, 156, 255, 0.48);
+	box-shadow: 0 18px 36px rgba(3, 7, 18, 0.28);
+}
+
+@keyframes reveal-up {
+	from { opacity: 0; transform: translateY(18px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes orbit-spin {
+	from { transform: translate(-50%, -50%) rotate(0deg); }
+	to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes orbit-spin-reverse {
+	from { transform: translate(-50%, -50%) rotate(42deg); }
+	to { transform: translate(-50%, -50%) rotate(-318deg); }
+}
+
+@keyframes art-scan {
+	0%, 100% { opacity: 0.2; }
+	50% { opacity: 0.9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+	}
+}
