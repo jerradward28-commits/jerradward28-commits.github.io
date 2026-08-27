@@ -3,12 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Jerrad Ward is a Long Beach digital marketer and growth strategist focused on performance marketing, content strategy, SEO, and lead generation." />
-    <meta property="og:title" content="Jerrad Ward | Digital Marketer & Growth Strategist" />
-    <meta property="og:description" content="Strategy, campaigns, and digital experiences that turn attention into measurable growth." />
+    <title>Jerrad Ward | Digital Marketing &amp; Analytics Portfolio</title>
+    <meta name="title" content="Jerrad Ward | Digital Marketing &amp; Analytics Portfolio" />
+    <meta name="description" content="Data-driven marketing strategies, campaign audits, and analytics case studies by Jerrad Ward. Featuring work on Away Luggage and Pour &amp; Parcel." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://jerradward.me/" />
-    <title>Jerrad Ward | Digital Marketer &amp; Growth Strategist</title>
+    <meta property="og:title" content="Jerrad Ward | Digital Marketing &amp; Analytics Portfolio" />
+    <meta property="og:description" content="Data-driven marketing strategies, campaign audits, and analytics case studies by Jerrad Ward. View my portfolio and case studies." />
+    <meta property="og:image" content="https://jerradward.me/assets/og-preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://jerradward.me/" />
+    <meta name="twitter:title" content="Jerrad Ward | Digital Marketing &amp; Analytics Portfolio" />
+    <meta name="twitter:description" content="Data-driven marketing strategies, campaign audits, and analytics case studies by Jerrad Ward." />
+    <meta name="twitter:image" content="https://jerradward.me/assets/og-preview.png" />
     <style>
       :root {
         --bg: #0b1020;
@@ -1064,7 +1073,8 @@
           </div>
         </div>
 
-        <form class="cta-form" id="contact-form">
+        <form class="cta-form" id="contact-form" action="https://formspree.io/f/mzebpgkj" method="POST">
+          <input type="hidden" name="_subject" value="New portfolio inquiry" />
           <input id="name" name="name" type="text" placeholder="Your name" aria-label="Your name" autocomplete="name" required />
           <input id="email" name="email" type="email" placeholder="Email address" aria-label="Email address" autocomplete="email" required />
           <textarea id="message" name="message" rows="3" placeholder="Tell me about your goals" aria-label="Tell me about your goals" required></textarea>
@@ -1078,27 +1088,6 @@
       © 2026 Jerrad Ward | <a href="mailto:jerradward28@gmail.com">jerradward28@gmail.com</a> | <a href="tel:+15625080131">(562) 508-0131</a>
     </footer>
     <script>
-      const contactForm = document.querySelector("#contact-form");
-      const formStatus = document.querySelector("#form-status");
-
-      contactForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        if (!contactForm.checkValidity()) {
-          contactForm.reportValidity();
-          return;
-        }
-
-        const formData = new FormData(contactForm);
-        const subject = encodeURIComponent(`Portfolio inquiry from ${formData.get("name")}`);
-        const body = encodeURIComponent(
-          `Name: ${formData.get("name")}\nEmail: ${formData.get("email")}\n\n${formData.get("message")}`
-        );
-
-        formStatus.textContent = "Opening your email app...";
-        window.location.href = `mailto:jerradward28@gmail.com?subject=${subject}&body=${body}`;
-      });
-
       document.querySelectorAll("a[data-pdf-name]").forEach((button) => {
         button.addEventListener("click", function () {
           const pdfName = this.getAttribute("data-pdf-name");
