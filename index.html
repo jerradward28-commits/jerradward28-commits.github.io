@@ -842,6 +842,21 @@
             </div>
           </article>
         </div>
+
+        <div class="button-row">
+          <a href="assets/Away_Luggage_Campaign_Audit.pdf"
+             download
+             data-pdf-name="Away Luggage Campaign Audit"
+             class="btn btn-primary pdf-download-btn">
+            Download PDF &#x2913;
+          </a>
+          <a href="assets/Pour_and_Parcel_Brand_Roadmap.pdf"
+             download
+             data-pdf-name="Pour &amp; Parcel Brand Roadmap"
+             class="btn btn-primary pdf-download-btn">
+            Download PDF &#x2913;
+          </a>
+        </div>
       </section>
 
       <section class="section" id="services">
@@ -1082,6 +1097,23 @@
 
         formStatus.textContent = "Opening your email app...";
         window.location.href = `mailto:jerradward28@gmail.com?subject=${subject}&body=${body}`;
+      });
+
+      document.querySelectorAll("a[data-pdf-name]").forEach((button) => {
+        button.addEventListener("click", function () {
+          const pdfName = this.getAttribute("data-pdf-name");
+          const pdfUrl = this.getAttribute("href");
+
+          if (typeof gtag === "function") {
+            gtag("event", "pdf_download", {
+              file_name: pdfName,
+              file_url: pdfUrl,
+              event_category: "Case Study Engagement",
+              event_label: pdfName
+            });
+            console.log("GA4 Download Event Sent:", pdfName);
+          }
+        });
       });
     </script>
   </body>
